@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculator using Selector</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #e0f7fa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .calculator {
+      background: #004d40;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+      width: 280px;
+    }
+
+    #display {
+      width: 100%;
+      height: 50px;
+      text-align: right;
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      border: none;
+      border-radius: 8px;
+      padding-right: 10px;
+      background: #e0f2f1;
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    button {
+      height: 50px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      background: #00796b;
+      color: white;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #004d40;
+    }
+
+    .equal {
+      background: #009688;
+    }
+
+    .clear {
+      background: #d32f2f;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="calculator">
+    <input type="text" id="display" disabled />
+
+    <div class="buttons">
+      <button class="clear">C</button>
+      <button>/</button>
+      <button>*</button>
+      <button>-</button>
+      <button>7</button>
+      <button>8</button>
+      <button>9</button>
+      <button>+</button>
+      <button>4</button>
+      <button>5</button>
+      <button>6</button>
+      <button>.</button>
+      <button>1</button>
+      <button>2</button>
+      <button>3</button>
+      <button class="equal">=</button>
+      <button>0</button>
+    </div>
+  </div>
+
+  <script>
+    // Select elements using selectors
+    const display = document.querySelector('#display');
+    const buttons = document.querySelectorAll('.buttons button');
+    const clearBtn = document.querySelector('.clear');
+    const equalBtn = document.querySelector('.equal');
+
+    // Add click events for each button
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const value = btn.textContent;
+
+        if (value === 'C') {
+          display.value = '';
+        } 
+        else if (value === '=') {
+          try {
+            display.value = eval(display.value); // calculate the result
+          } catch {
+            display.value = 'Error';
+          }
+        } 
+        else {
+          display.value += value;
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
